@@ -1,3 +1,4 @@
+
 package com.android.halalfood.utils.common;
 
 import java.lang.reflect.Method;
@@ -22,22 +23,22 @@ public class PhoneInfo {
 
     /** app名字 */
     public static String AppName;
-    /** app版本. */
-    public static String AppVer;
-    /** app内部版本 */
-    public static int versionCode;
     /** app平台 */
     public static String AppPlatform;
-    /** 安装包渠道号 */
-    public static String AppPM;
-    /** umeng key */
-    public static String umengKey;
+    /** app内部版本 */
+    public static int VersionCode;
+    /** app版本 */
+    public static String VersionName;
+    /** Umeng channel */
+    public static String UmengChannel;
+    /** Umeng key */
+    public static String UmengKey;
     /**
      * 设备ID <br>
      * 需要增加权限&#60;uses-permission
      * android:name="android.permission.READ_PHONE_STATE"/>
      */
-    public static String DeviceID;
+    public static String deviceID;
     /**
      * 新设备ID 因为app公共字段的macid字段的值是手机mac地址且做了MD5处理
      * 为了与之相对应，特修改NewID的值为手机mac地址且做MD5处理
@@ -45,6 +46,8 @@ public class PhoneInfo {
     public static String NewID;
     /** newId是否是mac的md5编码 **/
     public static boolean isNewIdMacMd5 = false;
+    
+    
     /** 设备机型 */
     public static String Model;
     /** OS版本 */
@@ -124,12 +127,12 @@ public class PhoneInfo {
 
             //  app版本： (AppVer)
             if (info != null) {
-                AppVer = info.versionName;
+                VersionName = info.versionName;
             }
 
             // app内部版本： (versionCode)
             if (info != null) {
-                versionCode = info.versionCode;
+                VersionCode = info.versionCode;
             }
 
             //  app平台： (AppPlatform)
@@ -140,8 +143,8 @@ public class PhoneInfo {
                 PackageManager localPackageManager = outContext.getPackageManager();
                 ApplicationInfo localApplicationInfo = localPackageManager.getApplicationInfo(
                         outContext.getPackageName(), 128);
-                AppPM = (String) localApplicationInfo.metaData.get("UMENG_CHANNEL");
-                umengKey = (String) localApplicationInfo.metaData.get("UMENG_APPKEY");
+                UmengChannel = (String) localApplicationInfo.metaData.get("UMENG_CHANNEL");
+                UmengKey = (String) localApplicationInfo.metaData.get("UMENG_APPKEY");
             } catch (Exception e) {
                 // do nothing. not use the data
             }
@@ -149,8 +152,8 @@ public class PhoneInfo {
             //  设备ID，每台设备唯一 (DeviceID)沿用anjuke以前的取数（设备的imei，平板可能会没有）
             TelephonyManager mTelephonyMgr = (TelephonyManager) outContext.getSystemService(Context.TELEPHONY_SERVICE);
             if (mTelephonyMgr != null) {
-                DeviceID = mTelephonyMgr.getDeviceId();
-                phoneId = DeviceID;
+                deviceID = mTelephonyMgr.getDeviceId();
+                phoneId = deviceID;
             }
 
             //  新设备ID, 与设备号类似，也是一个唯一编号。(NewID)
@@ -203,12 +206,12 @@ public class PhoneInfo {
                 }).start();
             }
             if ((bakDevid == null || bakDevid.trim().length() == 0)
-                    && (DeviceID != null && DeviceID.trim().length() > 7)) { // 过滤
+                    && (deviceID != null && deviceID.trim().length() > 7)) { // 过滤
                                                                              // 0，unknown,null
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        setBakDeviceID(DeviceID);
+                        setBakDeviceID(deviceID);
                     }
                 }).start();
             }
@@ -232,8 +235,8 @@ public class PhoneInfo {
                     if (NewID == null || NewID.trim().length() == 0) {
                         NewID = uuid;
                     }
-                    if (DeviceID == null || DeviceID.trim().length() < 8) {// unknown
-                        DeviceID = uuid;
+                    if (deviceID == null || deviceID.trim().length() < 8) {// unknown
+                        deviceID = uuid;
                     }
                 }
             }).start();

@@ -19,8 +19,8 @@ public class DevUtil {
     private static Context mContext;
 
     private static boolean isDebug;
-    private static boolean isUnit = false;
-    private static boolean isAllowedKey = false;// 是否合法签名
+    private static boolean isUnit = false; // 是否单元测试
+    private static boolean isAllowedKey = false; // 是否合法签名
     private static HashMap<String, Long> oldTimeMap = new HashMap<String, Long>();
 
     private static final String NOT_INITIALIZE_ERROR_STRING = DevUtil.class.getSimpleName()
@@ -30,13 +30,14 @@ public class DevUtil {
         mContext = context;
         debugAccess(isUnit);
     }
-    
+
     /**
      * 为了搭建测试环境必须重载此方法
+     * 
      * @param context
      * @param isUnitTest
      */
-    public static void initialize(Context context,boolean isUnitTest){
+    public static void initialize(Context context, boolean isUnitTest) {
         mContext = context;
         isUnit = true;
         debugAccess(isUnitTest);
@@ -65,16 +66,44 @@ public class DevUtil {
         }
 
         if (isDebug) {
-            Log.v(yourName, message + " - tag:" + yourName);
+            Log.v(yourName, message);
+        }
+    }
+
+    public static void e(String yourName, String message) {
+        if (mContext == null) {
+            throw new RuntimeException(NOT_INITIALIZE_ERROR_STRING);
+        }
+        if (isDebug) {
+            Log.e(yourName, message);
         }
     }
 
     public static void w(String tag, String msg, Throwable tr) {
-        if (mContext == null)
+        if (mContext == null) {
             throw new RuntimeException(NOT_INITIALIZE_ERROR_STRING);
+        }
+        if (isDebug) {
+            Log.w(tag, msg, tr);
+        }
+    }
 
-        if (isDebug)
-            Log.w(tag, msg + " - tag:" + tag, tr);
+    public static void i(String yourName, String message) {
+        if (mContext == null) {
+            throw new RuntimeException(NOT_INITIALIZE_ERROR_STRING);
+        }
+        if (isDebug) {
+            Log.i(yourName, message);
+        }
+    }
+
+    public static void d(String yourName, String message) {
+        if (mContext == null) {
+            throw new RuntimeException(NOT_INITIALIZE_ERROR_STRING);
+        }
+        if (isDebug) {
+            Log.v(yourName, message);
+        }
     }
 
     /**
@@ -89,7 +118,6 @@ public class DevUtil {
         if (mContext == null) {
             throw new RuntimeException(NOT_INITIALIZE_ERROR_STRING);
         }
-
         if (isDebug) {
             Long currentTime = System.currentTimeMillis();
             Long oldTimeTemp = oldTimeMap.get(yourName);
@@ -97,7 +125,7 @@ public class DevUtil {
                 oldTimeTemp = System.currentTimeMillis();
             }
             Long durationTime = currentTime - oldTimeTemp;
-            Log.v(yourName, message + " durationTime:" + durationTime + " - tag:" + yourName);
+            Log.v(yourName, message + " durationTime:" + durationTime);
             oldTimeTemp = currentTime;
             oldTimeMap.put(yourName, oldTimeTemp);
         }
@@ -128,45 +156,35 @@ public class DevUtil {
         }
         return isAllowedKey;
     }
-    /**
-     * 
 
     /**
-     * 判断是否开发版本、是否合法的签名
-     * 
-     * 新增:单元测试不支持签名，如果调用debugAccess()会报空指针异常，因此重写debugAccess方法，加入isUnitTest参数进行判断
+     * 判断是否开发版本、是否合法的签名 新增:单元测试不支持签名，如果调用debugAccess()会报空指针异常，因此重写debugAccess方法
+     * ，加入isUnitTest参数进行判断
      */
     private static void debugAccess(boolean isUnitTest) {
-
         final int DEBUG_SIGNATURE_HASH = -545290802;
-        final int ONLINE_SIGNATURE_HASH = -972500024;
+        final int ONLINE_SIGNATURE_HASH = -1876577873; // HalalFood 的签名keystore
         isDebug = false;
 
         // 判断是否为调试状态
         // http://stackoverflow.com/questions/3029819/android-automatically-choose-debug-release-maps-api-key
         PackageManager manager = mContext.getPackageManager();
-        
-        if (isUnitTest){
+        if (isUnitTest) {
             isDebug = false;
             isAllowedKey = true;
-        }else{
+        } else {
             try {
-    
                 PackageInfo info = manager.getPackageInfo(mContext.getPackageName(), PackageManager.GET_SIGNATURES);
-               
-    
+
                 for (Signature sig : info.signatures) {
-    
                     if (sig.hashCode() == DEBUG_SIGNATURE_HASH) {
                         isDebug = true;
                         isAllowedKey = true;
                     }
-    
                     if (sig.hashCode() == ONLINE_SIGNATURE_HASH) {
                         isAllowedKey = true;
                     }
                 }
-    
             } catch (NameNotFoundException e) {
                 isDebug = false;
             }
@@ -186,6 +204,39 @@ public class DevUtil {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 开启StrickMode
+     */
+    @TargetApi(9)
+    public static void enableStrictMode() {
+        if (hasGingerbread()) {
+            StrictMode.ThreadPolicy.Builder threadPolicyBuilder =
+                    new StrictMode.ThreadPolicy.Builder()
+                            .detectAll()
+                            .penaltyLog();
+            StrictMode.VmPolicy.Builder vmPolicyBuilder =
+                    new StrictMode.VmPolicy.Builder()
+                            .detectAll()
+                            .penaltyLog();
+            StrictMode.setThreadPolicy(threadPolicyBuilder.build());
+            StrictMode.setVmPolicy(vmPolicyBuilder.build());
+        }
+    }
+
+    /**
+     * 关闭StrickMode
+     */
+    @TargetApi(9)
+    public static void disableStrictMode() {
+        if (hasGingerbread()) {
+            StrictMode.ThreadPolicy.Builder threadPolicyBuilder =
+                    new StrictMode.ThreadPolicy.Builder()
+                            .permitAll()
+                            .penaltyLog();
+            StrictMode.setThreadPolicy(threadPolicyBuilder.build());
+        }
     }
 
     /**
@@ -252,7 +303,7 @@ public class DevUtil {
     }
 
     /**
-     * 手机操作系统是否>=HoneycombMR1 level14 4.0
+     * 手机操作系统是否>=ICE_CREAM_SANDWICH level14 4.0
      * 
      * @return
      */
@@ -261,7 +312,7 @@ public class DevUtil {
     }
 
     /**
-     * 手机操作系统是否>=HoneycombMR1 level16 4.1
+     * 手机操作系统是否>=JELLY_BEAN level16 4.1
      * 
      * @return
      */
@@ -270,73 +321,48 @@ public class DevUtil {
     }
 
     /**
-     * 手机操作系统是否>=HoneycombMR1 level17 4.2
+     * 手机操作系统是否>=JELLY_BEAN_MR1 level17 4.2
      * 
      * @return
      */
     public static boolean hasJellyBean4_2() {
-        return Build.VERSION.SDK_INT >= 17;// Build.VERSION_CODES.JELLY_BEAN;
+        return Build.VERSION.SDK_INT >= 17;// Build.VERSION_CODES.JELLY_BEAN_MR1;
     }
 
     /**
-     * 开启StrickMode
-     */
-    @TargetApi(9)
-    public static void enableStrictMode() {
-
-        if (hasGingerbread()) {
-
-            StrictMode.ThreadPolicy.Builder threadPolicyBuilder =
-                    new StrictMode.ThreadPolicy.Builder()
-                            .detectAll()
-                            .penaltyLog();
-
-            StrictMode.VmPolicy.Builder vmPolicyBuilder =
-                    new StrictMode.VmPolicy.Builder()
-                            .detectAll()
-                            .penaltyLog();
-
-            StrictMode.setThreadPolicy(threadPolicyBuilder.build());
-            StrictMode.setVmPolicy(vmPolicyBuilder.build());
-        }
-    }
-
-    /**
-     * 关闭StrickMode
-     */
-    @TargetApi(9)
-    public static void disableStrictMode() {
-
-        if (hasGingerbread()) {
-
-            StrictMode.ThreadPolicy.Builder threadPolicyBuilder =
-                    new StrictMode.ThreadPolicy.Builder()
-                            .permitAll()
-                            .penaltyLog();
-
-            StrictMode.setThreadPolicy(threadPolicyBuilder.build());
-        }
-    }
-
-    /**
-     * 获取一个全局的Context
+     * 手机操作系统是否>=JELLY_BEAN_MR2 level18 4.3
      * 
      * @return
      */
-    public static Context getContext() {
-        if (mContext == null) {
-            throw new RuntimeException(NOT_INITIALIZE_ERROR_STRING);
-        }
-        return mContext;
+    public static boolean hasJellyBean4_3() {
+        return Build.VERSION.SDK_INT >= 18;// Build.VERSION_CODES.JELLY_BEAN_MR2;
     }
 
-    public static void d(String yourName, String message) {
-        if (mContext == null) {
-            throw new RuntimeException(NOT_INITIALIZE_ERROR_STRING);
-        }
-
-        if (isDebug) {
-            Log.v(yourName, message + " - tag:" + yourName);
-        }
+    /**
+     * 手机操作系统是否>=KITKAT level19 4.4
+     * 
+     * @return
+     */
+    public static boolean hasKitKat4_4() {
+        return Build.VERSION.SDK_INT >= 19;// Build.VERSION_CODES.KITKAT;
     }
+
+    /**
+     * 手机操作系统是否>=KITKAT_WATCH level20 4.4W
+     * 
+     * @return
+     */
+    public static boolean hasKitKat_Watch4_4W() {
+        return Build.VERSION.SDK_INT >= 20;// Build.VERSION_CODES.KITKAT_WATCH;
+    }
+
+    /**
+     * 手机操作系统是否>=LOLLIPOP level21 5.0
+     * 
+     * @return
+     */
+    public static boolean hasLollipop5() {
+        return Build.VERSION.SDK_INT >= 21;// Build.VERSION_CODES.LOLLIPOP;
+    }
+
 }

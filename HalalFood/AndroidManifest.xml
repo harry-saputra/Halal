@@ -6,7 +6,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="8"
         android:targetSdkVersion="21" />
 
     <!-- 允许应用程序读取电话状态的权限 -->
@@ -20,13 +20,10 @@
 
     <application
         android:name="com.android.halalfood.HalalFoodApp"
-        android:allowBackup="true"
-        android:hardwareAccelerated="true"
+        android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:largeHeap="true"
-        android:theme="@style/AppTheme"
-        tools:replace="name,icon,label,theme" >
+        android:theme="@style/AppTheme" >
 
         <!-- 友盟基本统计：value为添加应用时获得的key ，name的值不要更改 -->
         <!-- 线下546b8b5bfd98c512fb002308，线上546b8ad8fd98c597650041bd -->

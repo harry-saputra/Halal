@@ -1,4 +1,3 @@
-
 package com.android.halalfood;
 
 import java.util.ArrayList;
@@ -9,6 +8,7 @@ import android.app.Application;
 import com.android.halalfood.constants.CommonConstants;
 import com.android.halalfood.module.crash.CrashHandler;
 import com.android.halalfood.module.umeng.StatisticsController;
+import com.android.halalfood.utils.common.DevUtil;
 import com.android.halalfood.utils.common.PhoneInfo;
 import com.umeng.analytics.MobclickAgent;
 
@@ -30,8 +30,12 @@ public class HalalFoodApp extends Application {
         PhoneInfo.initialize(this, CommonConstants.PHONE_APPNAME);
         // 初始化Umeng统计
         StatisticsController.initStatistics();
-        // 初始化程序Crash后的异常捕获
-        CrashHandler.getInstance().init(_instance);
+        // 初始化DevUtil
+        DevUtil.initialize(this);
+        if (!DevUtil.isDebug()) {
+            // Crash后的未捕获异常处理,防止弹出“停止运行”对话框
+            CrashHandler.getInstance().init(this);
+        }
     }
 
     public static HalalFoodApp getInstance() {
@@ -57,7 +61,7 @@ public class HalalFoodApp extends Application {
      */
     public void finishActivityAndExit() {
         // 退出应用前，保存Umeng统计数据
-        MobclickAgent.onKillProcess(_instance);
+        MobclickAgent.onKillProcess(this);
         // 退出activity，杀死应用进程，退出App
         for (Activity activity : list) {
             if (null != activity) {
