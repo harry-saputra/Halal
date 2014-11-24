@@ -8,8 +8,8 @@ import android.app.Application;
 
 import com.android.halalfood.module.crash.CrashHandler;
 import com.android.halalfood.module.umeng.UmengController;
-import com.android.halalfood.utils.common.DevUtil;
-import com.android.halalfood.utils.common.PhoneInfo;
+import com.android.halalfood.utils.DevUtil;
+import com.android.halalfood.utils.PhoneInfo;
 import com.umeng.analytics.MobclickAgent;
 
 public class HalalFoodApp extends Application {

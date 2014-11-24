@@ -1,5 +1,5 @@
 
-package com.android.halalfood.utils.common;
+package com.android.halalfood.utils;
 
 /**
  * 短连接算法

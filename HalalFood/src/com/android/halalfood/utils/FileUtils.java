@@ -1,4 +1,4 @@
-package com.android.halalfood.utils.common;
+package com.android.halalfood.utils;
 
 import java.io.BufferedReader;
 import java.io.File;

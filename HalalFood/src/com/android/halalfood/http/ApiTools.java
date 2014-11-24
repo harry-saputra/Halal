@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSON;
 import com.android.common.http.NativeHttpUtil;
 import com.android.halalfood.constants.ApiConstants;
 import com.android.halalfood.constants.ApiConstants.Method;
-import com.android.halalfood.utils.common.DevUtil;
+import com.android.halalfood.utils.DevUtil;
 
 public class ApiTools {
 
