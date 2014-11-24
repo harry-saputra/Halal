@@ -9,12 +9,13 @@ import android.text.TextUtils;
 import com.android.halalfood.HalalFoodApp;
 import com.umeng.analytics.MobclickAgent;
 
-public class StatisticsController {
+public class UmengController {
 
     /**
-     * (U盟的数据统计)
+     * 初始化Umeng统计 (U盟的数据统计)
      */
-    public static void initStatistics() {
+    public static void initStatistics(Context ctx) {
+        initUmeng(ctx);
         saveUMeng();
     }
 

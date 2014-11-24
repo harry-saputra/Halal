@@ -14,6 +14,8 @@ import java.util.Enumeration;
 
 /**
  * 网络工具类
+ * 
+ * @author hua
  */
 public class NetworkUtil {
 

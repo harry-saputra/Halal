@@ -1,3 +1,4 @@
+
 package com.android.halalfood;
 
 import java.util.ArrayList;
@@ -5,9 +6,8 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.Application;
 
-import com.android.halalfood.constants.CommonConstants;
 import com.android.halalfood.module.crash.CrashHandler;
-import com.android.halalfood.module.umeng.StatisticsController;
+import com.android.halalfood.module.umeng.UmengController;
 import com.android.halalfood.utils.common.DevUtil;
 import com.android.halalfood.utils.common.PhoneInfo;
 import com.umeng.analytics.MobclickAgent;
@@ -21,16 +21,16 @@ public class HalalFoodApp extends Application {
     public String uMengChannel = "Umeng";
     public String uMengKey = "546b8b5bfd98c512fb002308";
 
+    // 手机app名称
+    public static final String PHONE_APPNAME = "a-halalfood";
+
     @Override
     public void onCreate() {
         super.onCreate();
         _instance = this;
 
-        // 初始化PhoneInfo
-        PhoneInfo.initialize(this, CommonConstants.PHONE_APPNAME);
-        // 初始化Umeng统计
-        StatisticsController.initStatistics();
-        // 初始化DevUtil
+        PhoneInfo.initialize(this, PHONE_APPNAME);
+        UmengController.initStatistics(this);
         DevUtil.initialize(this);
         if (!DevUtil.isDebug()) {
             // Crash后的未捕获异常处理,防止弹出“停止运行”对话框

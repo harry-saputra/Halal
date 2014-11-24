@@ -1,13 +1,13 @@
 
 package com.android.halalfood.utils.common;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
-import java.security.MessageDigest;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.UUID;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -17,9 +17,20 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.provider.Settings.Secure;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 
+/**
+ * 手机信息
+ * <br>
+ * AppName,AppPlatform,VersionCode,VersionName,UmengChannel,UmengKey
+ * Model,OSVer,OSDesc,DeviceID,AndroidID,MacId,UniqueDeviceID,uuid,phoneNum
+ * @author hua
+ *
+ */
 public class PhoneInfo {
+
+    public static Context mOutContext;
 
     /** app名字 */
     public static String AppName;
@@ -33,87 +44,89 @@ public class PhoneInfo {
     public static String UmengChannel;
     /** Umeng key */
     public static String UmengKey;
-    /**
-     * 设备ID <br>
-     * 需要增加权限&#60;uses-permission
-     * android:name="android.permission.READ_PHONE_STATE"/>
-     */
-    public static String deviceID;
-    /**
-     * 新设备ID 因为app公共字段的macid字段的值是手机mac地址且做了MD5处理
-     * 为了与之相对应，特修改NewID的值为手机mac地址且做MD5处理
-     */
-    public static String NewID;
-    /** newId是否是mac的md5编码 **/
-    public static boolean isNewIdMacMd5 = false;
-    
-    
+
     /** 设备机型 */
     public static String Model;
     /** OS版本 */
     public static String OSVer;
-    /** 系统ro.build.description */
+    /** 系统描述ro.build.description */
     public static String OSDesc;
-    /** 鉴于2.5时<var>NewID</var>变更了自己原本获取ANDROIDID的意义，重新定义一个用于获取该值 */
+
+    /**
+     * 设备的DeviceID<br>
+     * 需要增加权限uses-permission android:name="android.permission.READ_PHONE_STATE" <br>
+     * 根据不同的手机设备返回IMEI，MEID或者ESN码，非手机设备获取不到 IMEI:国际移动电话设备识别码（International
+     * Mobile Equipment Identity），即手机串号 MEID:移动设备识别码 ESN嘛码:电子序列号(Electronic
+     * Serial Number)
+     */
+    public static String DeviceID;
+
+    /**
+     * 设备的Android_ID，也有可能不唯一标识<br>
+     * 在设备首次启动时，系统会随机生成一个64位的数字，并把这个数字以16进制字符串的形式保存下来，
+     * 这个16进制的字符串就是ANDROID_ID，当设备被wipe后该值会被重置(刷机，或某些烧写工具可以修改此值)<br>
+     * 厂商定制系统的Bug：不同的设备可能会产生相同的ANDROID_ID：9774d56d682e549c<br>
+     * 厂商定制系统的Bug：有些设备返回的值为null。<br>
+     * 设备差异：对于CDMA设备，ANDROID_ID和TelephonyManager.getDeviceId() 返回相同的值。<br>
+     */
     public static String AndroidID;
+
+    /**
+     * 设备的MacId（Mac Address）<br>
+     * 不一定获取到，若不含有wifi、蓝牙模块或含有但没有使用过，则获取不到macid
+     */
+    public static String MacId;
+
+    /**
+     * MD5之后的设备MacId<br>
+     */
+    public static String MacIdMD5;
+
+    /**
+     * 用于唯一标识设备的编号，介于deviceId、mac地址、androidid均有可能获取不到，这里统一逻辑最大程度上获取唯一标示手机的编码。 <br>
+     * <br>
+     * 算法依次取:deviceId、androidid、md5后的mac地址 <br>
+     * <br>
+     * 取imei时需要增加权限<br>
+     * uses-permission android:name="android.permission.READ_PHONE_STATE"
+     */
+    public static String UniqueDeviceID;
 
     /**
      * uuid app安装一次重新生成个id <br>
      * 已经安装的使用线程从SharedPreferences中读取，uuid默认为null。
-     * PhoneInfo.initialize()后大概100ms不到后会设置该值
      */
     public static String uuid;
 
     /**
-     * 用于唯一标识设备的编号，介于imei、mac地址、androidId均有可能获取不到，这里统一逻辑最大程度上获取唯一标示手机的编码。 <br>
-     * <br>
-     * 算法依次取:imei、androidid、md5后的mac地址 <br>
-     * <br>
-     * 取imei时需要增加权限&#60;uses-permission
-     * android:name="android.permission.READ_PHONE_STATE"/>
-     */
-    public static String phoneId;
-
-    /**
      * 本机的手机号 不一定获取得到 <br>
-     * 需要增加权限&#60;uses-permission
-     * android:name="android.permission.READ_PHONE_STATE"/>
+     * 需要增加权限:uses-permission android:name="android.permission.READ_PHONE_STATE"
      */
-    public static String phoneNum;
+    public static String PhoneNum;
 
-    public static String lat;
-    public static String lng;
-    /** 当前定位到的城市id 若定位得到的城市在数据库中没有ID，cid=0 若是因为定位出错等问题，造成无法得知当前城市的，cid=-1 */
-    public static String cid;
-    /** 微聊id */
-    public static String _chatId = "0";
-    public static String _brokerId;
-    public static Context mOutContext;
-    private static String bakDevid;
-    private static int mCityId = -1;
-
-    public static int getmCityId() {
-        return mCityId;
-    }
-
-    public static void setmCityId(int mCityId) {
-        PhoneInfo.mCityId = mCityId;
-    }
+    public static final String PREFS_FILE_DEVICE = "device_id.xml";
+    public static final String PREFS_DEVICE_ID = "device_id";
+    public static final String KEY_MD5 = "halalfood_md5"; // 自定义生成 MD5 加密字符传前的混合
+                                                          // KEY
 
     public static void initialize(Context outContext) {
         initialize(outContext, "");
     }
 
+    /**
+     * 初始化PhoneInfo
+     * @param outContext
+     * @param appName
+     */
     public static void initialize(Context outContext, String appName) {
         mOutContext = outContext;
-
         PackageManager manager = outContext.getPackageManager();
         PackageInfo info = null;
 
         try {
             info = manager.getPackageInfo(outContext.getPackageName(), 0);
 
-            // app名字
+            //  app名字
             try {
                 if (appName == null || appName.trim().length() == 0) {
                     ApplicationInfo ai = manager.getApplicationInfo(outContext.getPackageName(), 0);
@@ -125,12 +138,12 @@ public class PhoneInfo {
                 AppName = appName;
             }
 
-            //  app版本： (AppVer)
+            //  app版本： (VersionName)
             if (info != null) {
                 VersionName = info.versionName;
             }
 
-            // app内部版本： (versionCode)
+            // app内部版本： (VersionCode)
             if (info != null) {
                 VersionCode = info.versionCode;
             }
@@ -138,7 +151,16 @@ public class PhoneInfo {
             //  app平台： (AppPlatform)
             AppPlatform = "android";
 
-            //  安装包渠道号：(AppPM)
+            //  设备机型：如，iphone4，i9000 (Model)
+            Model = "Android-" + android.os.Build.MODEL;
+
+            //  OS版本：如，iOS5.0，android2.3.7 (OSVer)
+            OSVer = android.os.Build.VERSION.RELEASE;
+
+            //  OS描述
+            OSDesc = getBuildDescription();
+
+            //  Umeng渠道号：(UmengChannel)，UmengKey：(UmengKey)
             try {
                 PackageManager localPackageManager = outContext.getPackageManager();
                 ApplicationInfo localApplicationInfo = localPackageManager.getApplicationInfo(
@@ -149,116 +171,119 @@ public class PhoneInfo {
                 // do nothing. not use the data
             }
 
-            //  设备ID，每台设备唯一 (DeviceID)沿用anjuke以前的取数（设备的imei，平板可能会没有）
+            //  设备的DeviceID，平板可能会没有，若有，则作为唯一标示设备ID——UniqueDeviceID
             TelephonyManager mTelephonyMgr = (TelephonyManager) outContext.getSystemService(Context.TELEPHONY_SERVICE);
             if (mTelephonyMgr != null) {
-                deviceID = mTelephonyMgr.getDeviceId();
-                phoneId = deviceID;
+                DeviceID = mTelephonyMgr.getDeviceId();
+                UniqueDeviceID = DeviceID;
             }
 
-            //  新设备ID, 与设备号类似，也是一个唯一编号。(NewID)
-            try {
-                // String androidId =
-                // Secure.getString(outContext.getContentResolver(),
-                // Secure.ANDROID_ID);
-                // NewID = androidId;
-                NewID = MD5(getLocalMacAddress(outContext));// 因为app公共字段的macid字段的值是手机mac地址且做了MD5处理
-                                                            // 为了与之相对应，特修改NewID的值为手机mac地址且做MD5处理
-
-            } catch (Exception e) {
-                // do nothing. not use the data
-
-            }
-
-            try {
-                if (NewID == null || NewID.trim().length() == 0) {
-                    String androidId = Secure.getString(outContext.getContentResolver(), Secure.ANDROID_ID);
-                    NewID = androidId;
-                } else {
-                    isNewIdMacMd5 = true;
-                }
-            } catch (Exception e) {
-                // do nothing. not use the data
-            }
-
+            //  设备AndroidID
             try {
                 String androidId = Secure.getString(outContext.getContentResolver(), Secure.ANDROID_ID);
                 AndroidID = androidId;
-
-                if (phoneId == null || phoneId.trim().length() == 0) {
-                    phoneId = androidId;
+                if (TextUtils.isEmpty(UniqueDeviceID) || UniqueDeviceID.trim().length() == 0) {
+                    UniqueDeviceID = androidId;
                 }
             } catch (Exception e) {
-
+                // do nothing. not use the data
             }
 
-            if (phoneId == null || phoneId.trim().length() == 0) {
-                phoneId = MD5(getLocalMacAddress(outContext));
+            //  设备MacID，其实质是手机Wifi或蓝牙的MAC地址，若没有硬件或wifi、蓝牙未打开，则不能获取到
+            try {
+                MacId = getLocalMacAddress(outContext);
+                MacIdMD5 = MD5Tool.MD5(MacId);
+                if (TextUtils.isEmpty(UniqueDeviceID) || UniqueDeviceID.trim().length() == 0) {
+                    UniqueDeviceID = MacIdMD5;
+                }
+            } catch (Exception e) {
+                // do nothing. not use the data
             }
 
-            bakDevid = getBakDeviceID();
-            if ((bakDevid == null || bakDevid.trim().length() == 0) && (NewID != null && NewID.trim().length() > 0)) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        setBakDeviceID(NewID);
-                    }
-                }).start();
-            }
-            if ((bakDevid == null || bakDevid.trim().length() == 0)
-                    && (deviceID != null && deviceID.trim().length() > 7)) { // 过滤
-                                                                             // 0，unknown,null
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        setBakDeviceID(deviceID);
-                    }
-                }).start();
-            }
-
-            //  设备机型：如，iphone4，i9000 (Model)
-            Model = "Android-" + android.os.Build.MODEL;
-
-            //  OS版本：如，iOS5.0，android2.3.7 (OSVer)
-            OSVer = android.os.Build.VERSION.RELEASE;
-
-            OSDesc = getBuildDescription();
-
-            // uuid app安装一次重新生成个id
+            //  uuid app安装一次重新生成个id
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    uuid = getInstallID();
-                    if (bakDevid == null || bakDevid.trim().length() == 0) {
-                        setBakDeviceID(uuid);
+                    uuid = getUUID();
+                    if (DeviceID == null || DeviceID.trim().length() < 8) {
+                        // unknown
+                        DeviceID = uuid;
                     }
-                    if (NewID == null || NewID.trim().length() == 0) {
-                        NewID = uuid;
-                    }
-                    if (deviceID == null || deviceID.trim().length() < 8) {// unknown
-                        deviceID = uuid;
+                    if (TextUtils.isEmpty(UniqueDeviceID) || UniqueDeviceID.trim().length() == 0) {
+                        UniqueDeviceID = uuid;
                     }
                 }
             }).start();
 
             // 获取本机的手机号 有几率获取不到
             if (mTelephonyMgr != null) {
-                phoneNum = mTelephonyMgr.getLine1Number();
+                PhoneNum = mTelephonyMgr.getLine1Number();
             }
-
-            cid = "-1";
 
         } catch (Exception e) {
             Log.e(PhoneInfo.class.getName(), String.valueOf(e));
         }
     }
 
+    /**
+     * 获得app的UUID，是一个随机数，每次均不一样（长度为32）<br>
+     * UUID:全局唯一标识符,是指在一台机器上生成的数字，它保证对在同一时空中的所有机器都是唯一的.在微软或其他平台上也称Guid
+     * 在主流厂商生产的设备上，有一个很经常的bug，就是每个设备都会产生相同的ANDROID_ID：9774d56d682e549c
+     * 
+     * @return
+     */
+    @SuppressLint("SimpleDateFormat")
+    private static String getUUID() {
+        SharedPreferences prefs = mOutContext.getSharedPreferences(PREFS_FILE_DEVICE, 0);
+        String id = prefs.getString(PREFS_DEVICE_ID, null);
+        if (id != null && id.trim().length() > 0) {
+            return id;
+        } else {
+            UUID cur_uuid;
+            try {
+                String androidId = Secure.getString(mOutContext.getContentResolver(), Secure.ANDROID_ID);
+                if (!"9774d56d682e549c".equals(androidId)) {
+                    cur_uuid = UUID.nameUUIDFromBytes(androidId.getBytes("utf8"));
+                } else {
+                    String deviceId = ((TelephonyManager) mOutContext.getSystemService(Context.TELEPHONY_SERVICE))
+                            .getDeviceId();
+                    cur_uuid = deviceId != null ? UUID.nameUUIDFromBytes(deviceId.getBytes("utf8")) : UUID.randomUUID();
+                }
+            } catch (UnsupportedEncodingException e) {
+                throw new RuntimeException(e);
+            }
+            /**
+             * 短链接算法<br>
+             * 短链接算法是先将url进行MD5加密后生成的32位字符串，然后在对这32位处理，得出4个6位的字符串(这4个中每个都可最为短链接)
+             * 。 程序中采用了uuid自动生成32位唯一字符串。然后对这32为进行处理，在得出的4个短链接字符串中，选取第一个，作为id
+             */
+            String ret = new String(cur_uuid.toString().getBytes());
+            if (ret != null && ret.length() > 10) {
+                id = ShortUrlGenerator.shortUrl(KEY_MD5, ret);
+            }
+            prefs.edit().putString(PREFS_DEVICE_ID, id).commit();
+            return id;
+        }
+    }
+
+    /**
+     * 获得Mac地址
+     * 
+     * @param outContext
+     * @return
+     */
     public static String getLocalMacAddress(Context outContext) {
         WifiManager wifi = (WifiManager) outContext.getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = wifi.getConnectionInfo();
         return info != null ? info.getMacAddress() : "";
     }
 
+    /**
+     * 获得加密的Mac地址
+     * 
+     * @param outContext
+     * @return
+     */
     public static String getLocalMacAddressWithMD5(Context outContext) {
         WifiManager wifi = (WifiManager) outContext.getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = wifi.getConnectionInfo();
@@ -271,41 +296,14 @@ public class PhoneInfo {
         if (info.getMacAddress().trim().length() == 0) {
             return "";
         }
-        return MD5(info.getMacAddress());
+        return MD5Tool.MD5(info.getMacAddress());
     }
 
-    // MD5加密，32位
-    public static String MD5(String str) {
-        if (str == null) {
-            return "";
-        }
-        MessageDigest md5 = null;
-        try {
-            md5 = MessageDigest.getInstance("MD5");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-
-        char[] charArray = str.toCharArray();
-        byte[] byteArray = new byte[charArray.length];
-
-        for (int i = 0; i < charArray.length; i++) {
-            byteArray[i] = (byte) charArray[i];
-        }
-        byte[] md5Bytes = md5.digest(byteArray);
-
-        StringBuffer hexValue = new StringBuffer();
-        for (int i = 0; i < md5Bytes.length; i++) {
-            int val = (md5Bytes[i]) & 0xff;
-            if (val < 16) {
-                hexValue.append("0");
-            }
-            hexValue.append(Integer.toHexString(val));
-        }
-        return hexValue.toString();
-    }
-
+    /**
+     * 系统描述
+     * 
+     * @return
+     */
     public static String getBuildDescription() {
         String desc = "unknown";
         try {
@@ -321,66 +319,6 @@ public class PhoneInfo {
             e.printStackTrace();
         }
         return desc;
-    }
-
-    /**
-     * 得到随机数，每次均不一样
-     * 
-     * @return
-     */
-    @SuppressLint("SimpleDateFormat")
-    private static String getUUId() {
-        String ret;
-        ret = new String(UUID.randomUUID().toString().getBytes());
-        if (ret.length() > 10) {
-            String udid = new SimpleDateFormat("yyyyMMddHH").format(new Date());
-            ret = ret.substring(0, ret.length() - 10) + udid;
-        }
-
-        return ret;
-    }
-
-    /**
-     * 一个app安装一次生成一个id
-     * 
-     * @return
-     */
-    private static String getInstallID() {
-        String KEY = "uuid-aedcrasdfen";// key填充字符串 防止重复
-
-        String uuid = SharedPreferencesHelper.getInstance(mOutContext).getString(KEY);
-        if (uuid == null || uuid.trim().length() == 0) {
-            uuid = getUUId();
-            SharedPreferencesHelper.getInstance(mOutContext).putString(KEY, uuid);
-        }
-
-        return uuid;
-    }
-
-    /**
-     * 保存唯一设备id
-     * 
-     * @return
-     */
-    private static String setBakDeviceID(String devid) {
-        String KEY = "devid-anjuketag";
-        String dvid = SharedPreferencesHelper.getInstance(mOutContext).getString(KEY);
-        if (dvid == null || dvid.trim().length() == 0) {
-            SharedPreferencesHelper.getInstance(mOutContext).putString(KEY, devid);
-            dvid = devid;
-        }
-        return dvid;
-    }
-
-    /**
-     * 获取唯一设备id
-     * 
-     * @return
-     */
-    private static String getBakDeviceID() {
-        String KEY = "devid-anjuketag";
-        String dvid = SharedPreferencesHelper.getInstance(mOutContext).getString(KEY);
-        return dvid;
     }
 
     /**

@@ -11,6 +11,11 @@ import android.widget.Toast;
 import com.android.halalfood.HalalFoodApp;
 import com.android.halalfood.activity.GuideActivity;
 
+/**
+ * Crash后的未捕获异常处理,防止弹出“停止运行”对话框
+ * 
+ * @author hua
+ */
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     private HalalFoodApp application;

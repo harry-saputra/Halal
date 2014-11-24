@@ -20,7 +20,7 @@ import android.text.TextUtils;
 /**
  * 文件保存的东西
  * 
- * @author zlq
+ * @author hua
  */
 public class FileUtils {
 

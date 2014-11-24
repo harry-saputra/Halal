@@ -10,7 +10,6 @@ import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 
 import com.android.halalfood.R;
-import com.android.halalfood.module.umeng.StatisticsController;
 
 public class GuideActivity extends BaseActicity {
 
@@ -25,8 +24,6 @@ public class GuideActivity extends BaseActicity {
         getSupportActionBar().hide();
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        // 初始化Umeng统计
-        StatisticsController.initUmeng(this);
         
         setContentView(R.layout.activity_guide);
         initView();

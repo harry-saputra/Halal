@@ -14,6 +14,11 @@ import android.os.StrictMode;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+/**
+ * HalalFood dev tools
+ * 
+ * @author hua
+ */
 public class DevUtil {
 
     private static Context mContext;
@@ -26,6 +31,10 @@ public class DevUtil {
     private static final String NOT_INITIALIZE_ERROR_STRING = DevUtil.class.getSimpleName()
             + " not initialize. Please run " + DevUtil.class.getSimpleName() + ".initialize() first !";
 
+    /**
+     * 初始化DevUtil开发工具
+     * @param context
+     */
     public static void initialize(Context context) {
         mContext = context;
         debugAccess(isUnit);

@@ -16,6 +16,11 @@ import com.alibaba.fastjson.JSON;
 
 //http://stackoverflow.com/questions/4693387/sharedpreferences-and-thread-safety
 //http://developer.android.com/reference/android/content/SharedPreferences.html
+/**
+ * SharedPreferences 工具
+ * 
+ * @author hua
+ */
 public class SharedPreferencesHelper {
     private static SharedPreferencesHelper sInstance;
     private static SharedPreferences sSettings;
