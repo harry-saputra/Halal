@@ -1,0 +1,22 @@
+<com.android.nation.halalfood.module.fadingactionbar.ScrollViewX xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/dumb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/title_activity_business_details"
+            android:scaleType="fitStart"
+            android:src="@drawable/dumb" />
+    </LinearLayout>
+
+</com.android.nation.halalfood.module.fadingactionbar.ScrollViewX>

@@ -8,4 +8,12 @@
         <!-- API 11 theme customizations can go here. -->
     </style>
 
+    <!-- actionbar 透明渐隐 -->
+    <style name="FadingActionBarTheme" parent="Theme.AppCompat">
+        <item name="android:windowActionBarOverlay">true</item>
+
+        <!-- Support library compatibility -->
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
 </resources>

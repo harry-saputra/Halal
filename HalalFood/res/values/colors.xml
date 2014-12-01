@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="halal_light_gray">#c2c7cc</color>
+  <color name="halal_dark_gray">#3d454c</color>
+  <color name="halal_dark_gray_pressed">#373e44</color>
+  <color name="halal_darker_gray">#1f2226</color>
+  <color name="halal_white">#ffffff</color>
+  <color name="halal_light_yellow">#fffcf5</color>
+</resources>

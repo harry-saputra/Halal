@@ -17,4 +17,14 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <!-- actionbar 自定义(可复写) -->
+    <style name="FadingActionBarTheme" parent="Theme.AppCompat">
+
+        <!-- Support library compatibility -->
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
+    <!-- 无ActionBar -->
+    <style name="NoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar" />
+
 </resources>
