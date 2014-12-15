@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">VolleyHttpClient</string>
+    <string name="generic_server_down">无法连接到服务器</string>
+    <string name="no_internet">没有有效网络连接，请检查网络设置</string>
+    <string name="generic_error">网络请求错误</string>
+
+</resources>
