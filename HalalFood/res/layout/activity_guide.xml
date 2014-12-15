@@ -4,10 +4,9 @@
     android:layout_height="match_parent"
     android:background="@color/halal_white" >
 
-    <com.android.nation.halalfood.module.guide.VerticalViewPager
+    <com.rick.android.halalfood.module.guide.VerticalViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </com.android.nation.halalfood.module.guide.VerticalViewPager>
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

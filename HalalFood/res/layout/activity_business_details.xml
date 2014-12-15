@@ -1,4 +1,5 @@
-<com.android.nation.halalfood.module.fadingactionbar.ScrollViewX xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<com.rick.android.halalfood.module.fadingactionbar.ScrollViewX xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scroll_view"
     android:layout_width="match_parent"
@@ -19,4 +20,4 @@
             android:src="@drawable/dumb" />
     </LinearLayout>
 
-</com.android.nation.halalfood.module.fadingactionbar.ScrollViewX>
+</com.rick.android.halalfood.module.fadingactionbar.ScrollViewX>
