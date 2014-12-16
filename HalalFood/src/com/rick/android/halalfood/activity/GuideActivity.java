@@ -28,7 +28,6 @@ public class GuideActivity extends BaseActicity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
-        getSupportActionBar().hide();
 
         mViewPager = (VerticalViewPager) findViewById(R.id.pager);
         layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -72,7 +71,7 @@ public class GuideActivity extends BaseActicity {
 
                         @Override
                         public void onClick(View v) {
-                            // setGuided();
+                            setGuided();
                             goNext();
                         }
                     });

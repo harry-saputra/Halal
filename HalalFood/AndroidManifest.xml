@@ -52,13 +52,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/NoActionBarTheme" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.BusinessDetailsActivity"
-            android:label="@string/title_activity_business_details"
-            android:screenOrientation="portrait"
-            android:theme="@style/FadingActionBarTheme" />
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

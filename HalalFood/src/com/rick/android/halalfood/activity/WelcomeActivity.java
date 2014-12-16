@@ -51,7 +51,6 @@ public class WelcomeActivity extends BaseActicity {
         showToast(this, getIntent().getStringExtra("toastMsg"));
 
         // 全屏
-        getSupportActionBar().hide();
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 

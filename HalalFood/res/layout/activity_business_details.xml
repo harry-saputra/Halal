@@ -15,7 +15,7 @@
             android:id="@+id/dumb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/title_activity_business_details"
+            android:contentDescription="单页"
             android:scaleType="fitStart"
             android:src="@drawable/dumb" />
     </LinearLayout>
