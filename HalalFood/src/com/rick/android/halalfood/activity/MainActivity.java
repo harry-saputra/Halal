@@ -89,17 +89,14 @@ public class MainActivity extends BaseActicity {
             public void onClick(View v) {
                 Map<String, String> paramMap = new HashMap<String, String>();
                 paramMap.put("city", "上海");
-                paramMap.put("latitude", "31.21524");
-                paramMap.put("longitude", "121.420033");
                 paramMap.put("category", "美食");
                 paramMap.put("region", "长宁区");
                 paramMap.put("limit", "20");
-                paramMap.put("radius", "2000");
-                paramMap.put("offset_type", "0");
+                paramMap.put("radius", "5000");
                 paramMap.put("has_coupon", "1");
                 paramMap.put("has_deal", "1");
                 paramMap.put("keyword", "̩泰国菜");
-                paramMap.put("sort", "7");
+                paramMap.put("sort", "1");
                 paramMap.put("format", "json");
 
                 BusinessApi.findBussiness(paramMap, sucessListener, errorListener, TAG);
