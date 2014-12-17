@@ -1,4 +1,4 @@
-package com.anjuke.android.http.volley.util;
+package com.rick.android.volley.util;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -8,8 +8,8 @@ import java.util.Date;
 import android.annotation.SuppressLint;
 import android.util.Log;
 
-import com.anjuke.android.http.volley.HFVolley;
-import com.anjuke.android.http.volley.constant.CommonContants;
+import com.rick.android.volley.HFVolley;
+import com.rick.android.volley.constant.CommonContants;
 
 /**
  * Volley库中使用的工具方法，为避免过多的工具类引用，统一归置在CommonUtil中

@@ -1,7 +1,7 @@
 package com.rick.android.halalfood.http;
 
-import com.anjuke.android.http.volley.ApiConfig;
 import com.rick.android.halalfood.constants.ApiConstants;
+import com.rick.android.volley.ApiConfig;
 
 public class ApiConfigUtil {
 

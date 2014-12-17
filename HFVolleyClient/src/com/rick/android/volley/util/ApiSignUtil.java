@@ -1,4 +1,4 @@
-package com.anjuke.android.http.volley.util;
+package com.rick.android.volley.util;
 
 import java.util.Arrays;
 import java.util.Map;

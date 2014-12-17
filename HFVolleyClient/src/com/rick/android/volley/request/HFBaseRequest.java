@@ -1,4 +1,4 @@
-package com.anjuke.android.http.volley.request;
+package com.rick.android.volley.request;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,9 +11,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.RetryPolicy;
-import com.anjuke.android.http.volley.HFVolley;
-import com.anjuke.android.http.volley.util.ApiTool;
-import com.anjuke.android.http.volley.util.CommonUtil;
+import com.rick.android.volley.HFVolley;
+import com.rick.android.volley.util.ApiTool;
+import com.rick.android.volley.util.CommonUtil;
 
 public class HFBaseRequest<T> extends Request<T> {
 

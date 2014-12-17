@@ -11,7 +11,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         android:text="Welcome"
-        android:textColor="@color/halal_white"
+        android:textColor="@android:color/white"
         android:textSize="40sp" />
 
     <TextView
@@ -21,7 +21,7 @@
         android:layout_below="@+id/tv_welcome"
         android:layout_centerHorizontal="true"
         android:text="to"
-        android:textColor="@color/halal_white"
+        android:textColor="@android:color/white"
         android:textSize="28sp" />
 
     <TextView
@@ -31,7 +31,7 @@
         android:layout_below="@+id/tv_welcome_1"
         android:layout_centerHorizontal="true"
         android:text="HalalFood"
-        android:textColor="@color/halal_white"
+        android:textColor="@android:color/white"
         android:textSize="45sp" />
 
 </RelativeLayout>

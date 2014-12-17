@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.anjuke.android.http.volley.request;
+package com.rick.android.volley.request;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
@@ -26,7 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.HttpHeaderParser;
-import com.anjuke.android.http.volley.util.CommonUtil;
+import com.rick.android.volley.util.CommonUtil;
 
 public class HFJsonRequest<BaseResponse> extends HFBaseRequest<BaseResponse> {
     private final Class<BaseResponse> mClazz;

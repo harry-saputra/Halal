@@ -2,12 +2,12 @@ package com.rick.android.halalfood;
 
 import android.app.Application;
 
-import com.anjuke.android.http.volley.HFVolley;
 import com.rick.android.halalfood.http.ApiConfigUtil;
 import com.rick.android.halalfood.module.crash.CrashHandler;
 import com.rick.android.halalfood.module.umeng.UmengController;
 import com.rick.android.halalfood.utils.DevUtil;
 import com.rick.android.halalfood.utils.PhoneInfo;
+import com.rick.android.volley.HFVolley;
 import com.umeng.analytics.MobclickAgent;
 
 public class HalalFoodApp extends Application {

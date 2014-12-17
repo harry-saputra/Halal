@@ -1,4 +1,4 @@
-package com.anjuke.android.http.volley.util;
+package com.rick.android.volley.util;
 
 import android.content.Context;
 
@@ -9,7 +9,7 @@ import com.android.volley.NoConnectionError;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
-import com.anjuke.android.http.volley.R;
+import com.rick.android.volley.R;
 
 public class VolleyErrorHelper {
     /**

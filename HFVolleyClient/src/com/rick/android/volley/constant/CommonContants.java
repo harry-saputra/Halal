@@ -1,4 +1,4 @@
-package com.anjuke.android.http.volley.constant;
+package com.rick.android.volley.constant;
 
 public class CommonContants {
 

@@ -1,4 +1,4 @@
-package com.anjuke.android.http.volley.util;
+package com.rick.android.volley.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.android.volley.Request.Method;
-import com.anjuke.android.http.volley.HFVolley;
+import com.rick.android.volley.HFVolley;
 
 /**
  * volley api 工具

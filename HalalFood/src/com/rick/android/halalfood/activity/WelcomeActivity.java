@@ -83,9 +83,9 @@ public class WelcomeActivity extends BaseActicity {
          * 判断当前版本app与第几次运行，如果是第一次运行则跳转到引导界面，否则跳转到登陆界面
          */
         if (!isFirstIn && TextUtils.equals(PhoneInfo.VersionName, version)) {
-            mHandler.sendEmptyMessageDelayed(GO_NEXT, 2000);
+            mHandler.sendEmptyMessageDelayed(GO_NEXT, 1000);
         } else {
-            mHandler.sendEmptyMessageDelayed(GO_GUIDE, 2000);
+            mHandler.sendEmptyMessageDelayed(GO_GUIDE, 1000);
         }
     }
 

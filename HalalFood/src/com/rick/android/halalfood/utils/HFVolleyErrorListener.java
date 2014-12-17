@@ -4,9 +4,9 @@ import android.widget.Toast;
 
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.VolleyError;
-import com.anjuke.android.http.volley.util.VolleyErrorHelper;
 import com.rick.android.halalfood.HalalFoodApp;
 import com.rick.android.halalfood.R;
+import com.rick.android.volley.util.VolleyErrorHelper;
 
 public class HFVolleyErrorListener implements ErrorListener {
 

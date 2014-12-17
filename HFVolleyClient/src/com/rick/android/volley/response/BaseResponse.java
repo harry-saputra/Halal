@@ -1,4 +1,4 @@
-package com.anjuke.android.http.volley.response;
+package com.rick.android.volley.response;
 
 import android.text.TextUtils;
 

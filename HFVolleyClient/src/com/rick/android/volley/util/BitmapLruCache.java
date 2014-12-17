@@ -1,4 +1,4 @@
-package com.anjuke.android.http.volley.util;
+package com.rick.android.volley.util;
 
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;

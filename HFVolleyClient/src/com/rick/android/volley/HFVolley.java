@@ -1,4 +1,4 @@
-package com.anjuke.android.http.volley;
+package com.rick.android.volley;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -8,7 +8,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
-import com.anjuke.android.http.volley.util.BitmapLruCache;
+import com.rick.android.volley.util.BitmapLruCache;
 
 /**
  * AndroidVolleyClient 网络请求的封装类,在Application中调用init()初始化

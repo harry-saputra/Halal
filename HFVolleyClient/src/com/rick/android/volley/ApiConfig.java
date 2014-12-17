@@ -1,4 +1,4 @@
-package com.anjuke.android.http.volley;
+package com.rick.android.volley;
 
 public class ApiConfig {
     

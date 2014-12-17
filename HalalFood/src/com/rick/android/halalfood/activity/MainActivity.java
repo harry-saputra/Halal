@@ -19,11 +19,11 @@ import android.widget.TextView;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.anjuke.android.http.volley.HFVolley;
 import com.rick.android.halalfood.R;
 import com.rick.android.halalfood.http.BusinessApi;
 import com.rick.android.halalfood.http.response.FindBusinessResponse;
 import com.rick.android.halalfood.utils.HFVolleyErrorListener;
+import com.rick.android.volley.HFVolley;
 
 public class MainActivity extends BaseActicity {
 
@@ -46,10 +46,8 @@ public class MainActivity extends BaseActicity {
 
     private void initViews() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolbar.setTitle(R.string.app_name);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open,
                 R.string.drawer_close);

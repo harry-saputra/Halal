@@ -1,6 +1,6 @@
 package com.rick.android.halalfood.http.response;
 
-import com.anjuke.android.http.volley.response.BaseResponse;
+import com.rick.android.volley.response.BaseResponse;
 
 public class FindBusinessResponse extends BaseResponse {
     private String count;
