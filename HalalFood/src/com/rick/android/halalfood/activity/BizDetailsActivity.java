@@ -12,10 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rick.android.halalfood.R;
+import com.rick.android.halalfood.activity.base.BaseActicity;
 import com.rick.android.halalfood.module.fadingactionbar.ScrollViewX;
 import com.rick.android.halalfood.module.fadingactionbar.ScrollViewX.OnScrollViewListener;
 
-public class BusinessDetailsActivity extends BaseActicity {
+public class BizDetailsActivity extends BaseActicity {
 
     private ActionBar mActionBar;
 

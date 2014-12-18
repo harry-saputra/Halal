@@ -20,6 +20,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.rick.android.halalfood.R;
+import com.rick.android.halalfood.activity.base.BaseActicity;
 import com.rick.android.halalfood.http.BusinessApi;
 import com.rick.android.halalfood.http.response.FindBusinessResponse;
 import com.rick.android.halalfood.utils.HFVolleyErrorListener;
@@ -133,5 +134,14 @@ public class MainActivity extends BaseActicity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        /** 按Back键不退出应用，与Home键效果相同 */
+        Intent i = new Intent(Intent.ACTION_MAIN);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.addCategory(Intent.CATEGORY_HOME);
+        startActivity(i);
     }
 }

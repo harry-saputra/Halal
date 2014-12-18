@@ -17,6 +17,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- 允许应用程序联网，以便向Umeng的服务器端发送数据和App使用网络 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 允许一个程序获取信息有关当前或最近运行的任务，一个缩略的任务状态，是否活动等等 -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
         android:name="com.rick.android.halalfood.HalalFoodApp"
@@ -54,7 +56,7 @@
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.BusinessDetailsActivity"
+            android:name=".activity.BizDetailsActivity"
             android:screenOrientation="portrait" />
     </application>
 

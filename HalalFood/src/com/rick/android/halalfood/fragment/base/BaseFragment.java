@@ -1,39 +1,34 @@
-package com.rick.android.halalfood.activity;
+package com.rick.android.halalfood.fragment.base;
 
+import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.rick.android.halalfood.HalalFoodApp;
 import com.umeng.analytics.MobclickAgent;
 
-public class BaseFragmentActivity extends FragmentActivity {
+public class BaseFragment extends Fragment {
 
     protected String TAG;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
         TAG = getClass().getSimpleName();
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
+        MobclickAgent.onPageStart(TAG); // 统计页面
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+        MobclickAgent.onPageEnd(TAG);
     }
 
     protected void showAppToast(String toastMsg) {
@@ -47,4 +42,5 @@ public class BaseFragmentActivity extends FragmentActivity {
             Toast.makeText(ctx, toastMsg, Toast.LENGTH_SHORT).show();
         }
     }
+
 }

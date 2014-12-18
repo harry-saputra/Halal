@@ -11,6 +11,7 @@ import android.view.WindowManager;
 
 import com.rick.android.halalfood.HalalFoodApp;
 import com.rick.android.halalfood.R;
+import com.rick.android.halalfood.activity.base.BaseActicity;
 import com.rick.android.halalfood.constants.CommonConstants;
 import com.rick.android.halalfood.utils.NetworkUtil;
 import com.rick.android.halalfood.utils.PhoneInfo;
@@ -61,6 +62,12 @@ public class WelcomeActivity extends BaseActicity {
     protected void onResume() {
         super.onResume();
         initGo();
+    }
+    
+    @Override
+    protected void onAppFront() {
+        // TODO Auto-generated method stub
+        super.onAppFront();
     }
 
     @Override

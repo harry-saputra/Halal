@@ -21,6 +21,9 @@ public class HalalFoodApp extends Application {
     /** 手机app名称 */
     public static final String PHONE_APPNAME = "a-halalfood";
 
+    /** Flag：app是否在前台 */
+    public static boolean isActive;
+
     @Override
     public void onCreate() {
         super.onCreate();

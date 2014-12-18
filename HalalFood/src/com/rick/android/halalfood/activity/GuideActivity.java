@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.rick.android.halalfood.R;
+import com.rick.android.halalfood.activity.base.BaseActicity;
 import com.rick.android.halalfood.constants.CommonConstants;
 import com.rick.android.halalfood.module.guide.PagerAdapter;
 import com.rick.android.halalfood.module.guide.VerticalViewPager;
