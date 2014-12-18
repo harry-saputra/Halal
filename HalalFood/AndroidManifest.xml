@@ -54,9 +54,13 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MainActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.BizDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SettingsActivity"
             android:screenOrientation="portrait" />
     </application>
 

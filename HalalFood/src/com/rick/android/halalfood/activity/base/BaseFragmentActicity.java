@@ -2,7 +2,7 @@ package com.rick.android.halalfood.activity.base;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -10,7 +10,7 @@ import com.rick.android.halalfood.HalalFoodApp;
 import com.rick.android.halalfood.utils.TaskUtils;
 import com.umeng.analytics.MobclickAgent;
 
-public class BaseActicity extends ActionBarActivity {
+public class BaseFragmentActicity extends FragmentActivity {
 
     protected String TAG;
     protected Context mContext;

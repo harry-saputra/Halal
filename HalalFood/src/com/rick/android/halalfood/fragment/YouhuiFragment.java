@@ -21,7 +21,7 @@ import com.rick.android.halalfood.http.BusinessApi;
 import com.rick.android.halalfood.http.response.FindBusinessResponse;
 import com.rick.android.halalfood.utils.HFVolleyErrorListener;
 
-public class HomeFragment extends BaseFragment {
+public class YouhuiFragment extends BaseFragment {
 
     Listener<FindBusinessResponse> sucessListener;
     ErrorListener errorListener;
@@ -30,10 +30,10 @@ public class HomeFragment extends BaseFragment {
     TextView tv_ceshi;
     @InjectView(R.id.btn_ceshi)
     Button btn_ceshi;
-    
+
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_home;
+        return R.layout.fragment_youhui;
     }
 
     @Override

@@ -49,7 +49,7 @@ public class WelcomeActivity extends BaseActicity {
         super.onCreate(savedInstanceState);
 
         /** 程序crash后重启的友好提示 */
-        showToast(this, getIntent().getStringExtra("toastMsg"));
+        showToast(getIntent().getStringExtra("toastMsg"));
 
         // 全屏
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -63,7 +63,7 @@ public class WelcomeActivity extends BaseActicity {
         super.onResume();
         initGo();
     }
-    
+
     @Override
     protected void onAppFront() {
         // TODO Auto-generated method stub

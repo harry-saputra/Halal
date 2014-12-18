@@ -14,21 +14,10 @@
 
         <!-- 内容界面 -->
 
-        <RelativeLayout
-            android:id="@+id/rl_content"
+        <FrameLayout
+            android:id="@+id/fl_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <TextView
-                android:id="@+id/tv_test"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="我是内容"
-                android:textColor="@color/halal_light_black" />
-        </RelativeLayout>
+            android:layout_height="match_parent" />
 
         <!-- 侧滑菜单内容 -->
 
@@ -42,7 +31,7 @@
             <ScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/separator"
+                android:layout_above="@+id/v_line"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true" >
@@ -53,7 +42,7 @@
                     android:orientation="vertical" >
 
                     <ImageView
-                        android:id="@+id/user_cover"
+                        android:id="@+id/iv_user_cover"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/userSpace"
                         android:layout_alignParentLeft="true"
@@ -63,7 +52,7 @@
                         android:src="@drawable/info_bg" />
 
                     <ImageView
-                        android:id="@+id/user_photo"
+                        android:id="@+id/iv_user_photo"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
                         android:layout_alignParentLeft="true"
@@ -73,21 +62,10 @@
                         android:src="@drawable/ic_launcher" />
 
                     <LinearLayout
-                        android:id="@+id/sections"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_below="@+id/user_cover"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginTop="8dp"
-                        android:orientation="vertical" >
-                    </LinearLayout>
-
-                    <LinearLayout
                         android:id="@+id/gradient"
                         android:layout_width="wrap_content"
                         android:layout_height="56dp"
-                        android:layout_alignBottom="@+id/user_cover"
+                        android:layout_alignBottom="@+id/iv_user_cover"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentRight="true"
                         android:background="@drawable/black_gradient"
@@ -121,10 +99,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_below="@+id/gradient"
-                        android:orientation="horizontal" >
+                        android:background="@drawable/selector_list_item" >
 
                         <ImageView
-                            android:id="@+id/section_icon"
+                            android:id="@+id/iv_section_icon"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_centerVertical="true"
@@ -133,21 +111,21 @@
                             android:src="@drawable/ic_icon_grey" />
 
                         <TextView
-                            android:id="@+id/section_text"
+                            android:id="@+id/iv_home"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="72dp"
                             android:layout_marginRight="8dp"
-                            android:layout_toLeftOf="@+id/section_notification"
-                            android:layout_toStartOf="@+id/section_notification"
-                            android:text="Page1"
+                            android:layout_toLeftOf="@+id/tv_section_notification"
+                            android:layout_toStartOf="@+id/tv_section_notification"
+                            android:text="首页"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                             android:textColor="@android:color/black"
                             android:textSize="14sp" />
 
                         <TextView
-                            android:id="@+id/section_notification"
+                            android:id="@+id/tv_section_notification"
                             android:layout_width="40dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -156,7 +134,6 @@
                             android:gravity="center_horizontal"
                             android:lines="1"
                             android:maxLength="3"
-                            android:text="10"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
@@ -166,10 +143,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_below="@+id/rl_item1"
-                        android:orientation="horizontal" >
+                        android:background="@drawable/selector_list_item" >
 
                         <ImageView
-                            android:id="@+id/section_icon2"
+                            android:id="@+id/iv_youhui"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_centerVertical="true"
@@ -178,21 +155,21 @@
                             android:src="@drawable/ic_icon_grey" />
 
                         <TextView
-                            android:id="@+id/section_text2"
+                            android:id="@+id/tv_youhui"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="72dp"
                             android:layout_marginRight="8dp"
-                            android:layout_toLeftOf="@+id/section_notification2"
-                            android:layout_toStartOf="@+id/section_notification2"
-                            android:text="Page2"
+                            android:layout_toLeftOf="@+id/tv_youhui_notification"
+                            android:layout_toStartOf="@+id/tv_youhui_notification"
+                            android:text="优惠券"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                             android:textColor="@android:color/black"
                             android:textSize="14sp" />
 
                         <TextView
-                            android:id="@+id/section_notification2"
+                            android:id="@+id/tv_youhui_notification"
                             android:layout_width="40dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -201,7 +178,6 @@
                             android:gravity="center_horizontal"
                             android:lines="1"
                             android:maxLength="3"
-                            android:text="99+"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
@@ -211,10 +187,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_below="@+id/rl_item2"
-                        android:orientation="horizontal" >
+                        android:background="@drawable/selector_list_item" >
 
                         <ImageView
-                            android:id="@+id/section_icon3"
+                            android:id="@+id/iv_tuangou"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_centerVertical="true"
@@ -223,21 +199,21 @@
                             android:src="@drawable/ic_icon_grey" />
 
                         <TextView
-                            android:id="@+id/section_text3"
+                            android:id="@+id/tv_tuangou"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="72dp"
                             android:layout_marginRight="8dp"
-                            android:layout_toLeftOf="@+id/section_notification3"
-                            android:layout_toStartOf="@+id/section_notification3"
-                            android:text="Page3"
+                            android:layout_toLeftOf="@+id/tv_tuangou_notification"
+                            android:layout_toStartOf="@+id/tv_tuangou_notification"
+                            android:text="团购"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                             android:textColor="@android:color/black"
                             android:textSize="14sp" />
 
                         <TextView
-                            android:id="@+id/section_notification3"
+                            android:id="@+id/tv_tuangou_notification"
                             android:layout_width="40dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -246,7 +222,6 @@
                             android:gravity="center_horizontal"
                             android:lines="1"
                             android:maxLength="3"
-                            android:text="99+"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
@@ -256,10 +231,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_below="@+id/rl_item3"
-                        android:orientation="horizontal" >
+                        android:background="@drawable/selector_list_item" >
 
                         <ImageView
-                            android:id="@+id/section_icon4"
+                            android:id="@+id/iv_yuding"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_centerVertical="true"
@@ -268,21 +243,21 @@
                             android:src="@drawable/ic_icon_grey" />
 
                         <TextView
-                            android:id="@+id/section_text4"
+                            android:id="@+id/tv_yuding"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="72dp"
                             android:layout_marginRight="8dp"
-                            android:layout_toLeftOf="@+id/section_notification4"
-                            android:layout_toStartOf="@+id/section_notification4"
-                            android:text="Page4"
+                            android:layout_toLeftOf="@+id/tv_yuding_notification"
+                            android:layout_toStartOf="@+id/tv_yuding_notification"
+                            android:text="预定"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                             android:textColor="@android:color/black"
                             android:textSize="14sp" />
 
                         <TextView
-                            android:id="@+id/section_notification4"
+                            android:id="@+id/tv_yuding_notification"
                             android:layout_width="40dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -291,7 +266,6 @@
                             android:gravity="center_horizontal"
                             android:lines="1"
                             android:maxLength="3"
-                            android:text="99+"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
@@ -299,14 +273,14 @@
             </ScrollView>
 
             <View
-                android:id="@+id/separator"
+                android:id="@+id/v_line"
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:layout_above="@+id/bottom_sections"
+                android:layout_above="@+id/ll_bottom_section"
                 android:background="@color/halal_line" />
 
             <LinearLayout
-                android:id="@+id/bottom_sections"
+                android:id="@+id/ll_bottom_section"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -321,7 +295,7 @@
                     android:padding="10dp" >
 
                     <ImageView
-                        android:id="@+id/iv"
+                        android:id="@+id/iv_bottom_section_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -332,7 +306,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/iv"
+                        android:layout_toRightOf="@+id/iv_bottom_section_icon"
                         android:paddingLeft="15dp"
                         android:text="设置"
                         android:textSize="18sp" />
