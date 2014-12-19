@@ -1,93 +1,73 @@
 package com.rick.android.halalfood.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.RelativeLayout;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.rick.android.halalfood.R;
 import com.rick.android.halalfood.activity.base.BaseActicity;
+import com.rick.android.halalfood.adapter.CustomDrawerAdapter;
 import com.rick.android.halalfood.fragment.HomeFragment;
 import com.rick.android.halalfood.fragment.TuangouFragment;
 import com.rick.android.halalfood.fragment.YouhuiFragment;
 import com.rick.android.halalfood.fragment.YudingFragment;
+import com.rick.android.halalfood.module.drawer.DrawerItem;
 
 public class MainActivity extends BaseActicity implements OnClickListener {
 
-    private Toolbar mToolbar;
-    private DrawerLayout mDrawerLayout;
+    private List<DrawerItem> mList;
+    private CharSequence mTitle;// title 置 fragment Title
+    private CharSequence mDrawerTitle; // drawTitle 置 appname
+
+    private CustomDrawerAdapter mAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
-    private ShareActionProvider mShareActionProvider;
-    private Fragment homeFragment;
-    private Fragment youhuiFragment;
-    private Fragment tuangouFragment;
-    private Fragment yudingFragment;
-    private RelativeLayout rl_item1, rl_item2, rl_item3, rl_item4, rl_settings;
+
+    private Toolbar mToolbar;
+    private ListView mListView;
+    private TextView tv_about, tv_settings;
+    private ImageView iv_user_photo;
+    private DrawerLayout mDrawerLayout;
+    private LinearLayout ll_drawer_left;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) {
-            homeFragment = new HomeFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fl_content, homeFragment)
-                    .commit();
-        }
         initViews();
-    }
-
-    private void initViews() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open,
-                R.string.drawer_close);
-        mDrawerToggle.syncState();
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-        rl_item1 = (RelativeLayout) findViewById(R.id.rl_item1);
-        rl_item2 = (RelativeLayout) findViewById(R.id.rl_item2);
-        rl_item3 = (RelativeLayout) findViewById(R.id.rl_item3);
-        rl_item4 = (RelativeLayout) findViewById(R.id.rl_item4);
-        rl_settings = (RelativeLayout) findViewById(R.id.rl_settings);
-        rl_item1.setOnClickListener(this);
-        rl_item2.setOnClickListener(this);
-        rl_item3.setOnClickListener(this);
-        rl_item4.setOnClickListener(this);
-        rl_settings.setOnClickListener(this);
+        SelectItem(0);
     }
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
-            case R.id.rl_item1:
-                homeFragment = new HomeFragment();
-                showFrontFragment(homeFragment);
+            case R.id.tv_about:
+                intent = new Intent(mContext, AboutActivity.class);
+                startActivity(intent);
                 break;
-            case R.id.rl_item2:
-                youhuiFragment = new YouhuiFragment();
-                showFrontFragment(youhuiFragment);
+            case R.id.tv_settings:
+                intent = new Intent(mContext, SettingsActivity.class);
+                startActivity(intent);
                 break;
-            case R.id.rl_item3:
-                tuangouFragment = new TuangouFragment();
-                showFrontFragment(tuangouFragment);
-                break;
-            case R.id.rl_item4:
-                yudingFragment = new YudingFragment();
-                showFrontFragment(yudingFragment);
-                break;
-            case R.id.rl_settings:
-                Intent intent = new Intent(mContext, SettingsActivity.class);
+            case R.id.iv_user_photo:
+                intent = new Intent(mContext, UserInfoActivity.class);
                 startActivity(intent);
                 break;
             default:
@@ -95,46 +75,133 @@ public class MainActivity extends BaseActicity implements OnClickListener {
         }
     }
 
-    /**
-     * 显示选中的Fragment
-     * 
-     * @param fragment
-     */
-    private void showFrontFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fl_content, fragment)
-                .commitAllowingStateLoss();
+    private void initViews() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mListView = (ListView) findViewById(R.id.draw_listview);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        ll_drawer_left = (LinearLayout) findViewById(R.id.ll_drawer_left);
+        tv_about = (TextView) findViewById(R.id.tv_about);
+        tv_settings = (TextView) findViewById(R.id.tv_settings);
+        iv_user_photo = (ImageView) findViewById(R.id.iv_user_photo);
+        tv_about.setOnClickListener(this);
+        tv_settings.setOnClickListener(this);
+        iv_user_photo.setOnClickListener(this);
+
+        initActionBar();
+        initDrawerToggle();
+        initDrawerLeftData();
+    }
+
+    private void initActionBar() {
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        mTitle = mDrawerTitle = getTitle();
+    }
+
+    private void initDrawerToggle() {
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, mToolbar, R.string.drawer_open,
+                R.string.drawer_close) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                getSupportActionBar().setTitle(mTitle);
+                invalidateOptionsMenu();
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                getSupportActionBar().setTitle(mDrawerTitle);
+                invalidateOptionsMenu();
+            }
+        };
+        mDrawerToggle.syncState();
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+    }
+
+    private void initDrawerLeftData() {
+        mList = new ArrayList<DrawerItem>();
+        mList.add(new DrawerItem("首页", R.drawable.ic_icon_grey));
+        mList.add(new DrawerItem("优惠", R.drawable.ic_icon_grey, 9));
+        mList.add(new DrawerItem("团购", R.drawable.ic_icon_grey, 39));
+        mList.add(new DrawerItem("预约", R.drawable.ic_icon_grey, 69));
+        mAdapter = new CustomDrawerAdapter(this, mList);
+        mListView.setAdapter(mAdapter);
+        mListView.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                SelectItem(position);
+            }
+        });
+    }
+
+    public void SelectItem(int position) {
+        Fragment fragment = null;
+        switch (position) {
+            case 0:
+                fragment = new HomeFragment();
+                break;
+            case 1:
+                fragment = new YouhuiFragment();
+                break;
+            case 2:
+                fragment = new TuangouFragment();
+                break;
+            case 3:
+                fragment = new YudingFragment();
+                break;
+            default:
+                break;
+        }
+
+        FragmentManager frgManager = getSupportFragmentManager();
+        frgManager.beginTransaction().replace(R.id.fl_content, fragment)
+                .commit();
+
+        setTitle(mList.get(position).getTitle());
+        mListView.setItemChecked(position, true);
+        mDrawerLayout.closeDrawer(ll_drawer_left);
+    }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        mTitle = title;
+        getSupportActionBar().setTitle(mTitle);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        boolean drawerOpen = mDrawerLayout.isDrawerOpen(ll_drawer_left);
+        menu.findItem(R.id.action_search).setVisible(!drawerOpen);
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
     public void onBackPressed() {
-        /** 按Back键不退出应用，与Home键效果相同 */
-        Intent i = new Intent(Intent.ACTION_MAIN);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.addCategory(Intent.CATEGORY_HOME);
-        startActivity(i);
+        if (mDrawerLayout.isDrawerOpen(ll_drawer_left)) {
+            mDrawerLayout.closeDrawer(ll_drawer_left);
+        } else {
+            /** 按Back键不退出应用，与Home键效果相同 */
+            Intent i = new Intent(Intent.ACTION_MAIN);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.addCategory(Intent.CATEGORY_HOME);
+            startActivity(i);
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-        /** ShareActionProvider配置 */
-        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menu
-                .findItem(R.id.action_share));
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/*");
-        mShareActionProvider.setShareIntent(intent);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                showToast("设置");
-                break;
-            case R.id.action_share:
-                showToast("分享");
+                Intent intent = new Intent(mContext, SettingsActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;

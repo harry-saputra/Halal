@@ -60,7 +60,13 @@
             android:name=".activity.BizDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.AboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.UserInfoActivity"
             android:screenOrientation="portrait" />
     </application>
 

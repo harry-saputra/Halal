@@ -1,8 +1,11 @@
 package com.rick.android.halalfood.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.Gravity;
@@ -19,6 +22,7 @@ import com.rick.android.halalfood.module.fadingactionbar.ScrollViewX.OnScrollVie
 public class BizDetailsActivity extends BaseActicity {
 
     private Toolbar mToolbar;
+    private ShareActionProvider mShareActionProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +84,13 @@ public class BizDetailsActivity extends BaseActicity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.business_details, menu);
-        return true;
+        /** ShareActionProvider配置 */
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menu
+                .findItem(R.id.action_share));
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/*");
+        mShareActionProvider.setShareIntent(intent);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
