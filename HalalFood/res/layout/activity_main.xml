@@ -63,7 +63,7 @@
                     android:layout_alignBottom="@+id/iv_user_cover"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:background="@drawable/black_shadow"
+                    android:background="@drawable/gradient_shadow"
                     android:gravity="center_vertical"
                     android:orientation="vertical"
                     android:paddingLeft="20dp"
@@ -99,7 +99,8 @@
                 android:choiceMode="singleChoice"
                 android:divider="@android:color/transparent"
                 android:dividerHeight="0dp"
-                android:listSelector="@drawable/selector_list_item" />
+                android:fadingEdge="none"
+                android:listSelector="@android:color/transparent" />
 
             <View
                 android:id="@+id/v_line"

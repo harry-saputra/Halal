@@ -137,6 +137,7 @@ public class MainActivity extends BaseActicity implements OnClickListener {
     }
 
     public void SelectItem(int position) {
+        mListView.setItemChecked(position, true);
         Fragment fragment = null;
         switch (position) {
             case 0:
@@ -160,7 +161,6 @@ public class MainActivity extends BaseActicity implements OnClickListener {
                 .commit();
 
         setTitle(mList.get(position).getTitle());
-        mListView.setItemChecked(position, true);
         mDrawerLayout.closeDrawer(ll_drawer_left);
     }
 
