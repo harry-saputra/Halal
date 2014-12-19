@@ -1,25 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.rick.android.halalfood.module.fadingactionbar.ScrollViewX xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scroll_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@null"
+    tools:context=".MainActivity" >
 
-    <LinearLayout
-        android:id="@+id/ll"
+    <com.rick.android.halalfoodlibs.module.fab.view.ObservableScrollView
+        android:id="@+id/scrollview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:text="@string/app_name" >
 
-        <include layout="@layout/toolbar" />
-
-        <ImageView
-            android:id="@+id/dumb"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="单页"
-            android:scaleType="fitStart"
-            android:src="@drawable/dumb" />
-    </LinearLayout>
+            android:orientation="vertical" >
 
-</com.rick.android.halalfood.module.fadingactionbar.ScrollViewX>
+            <ImageView
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ny_light" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:colorBackground"
+                android:padding="16dp"
+                android:text="哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯哈哈风哈哈发货单付款后的看法好看的撒谎福克斯" />
+        </LinearLayout>
+    </com.rick.android.halalfoodlibs.module.fab.view.ObservableScrollView>
+
+    <include layout="@layout/toolbar" />
+
+</FrameLayout>
