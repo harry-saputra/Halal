@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true"><shape>
+            <gradient android:endColor="@color/halal_line" android:startColor="@color/halal_line" />
+        </shape></item>
+    <item android:state_focused="true"><shape>
+            <gradient android:endColor="@color/halal_line" android:startColor="@color/halal_line" />
+        </shape></item>
+    <item android:state_selected="true"><shape>
+            <gradient android:endColor="@color/halal_line" android:startColor="@color/halal_line" />
+        </shape></item>
+    <item><shape>
+            <gradient android:endColor="@android:color/transparent" android:startColor="@android:color/transparent" />
+        </shape></item>
+
+</selector>
