@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,19 +20,13 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
     protected final String TAG = this.getClass().getSimpleName();
 
     protected Context mContext;
-    protected List<T> mValues;
+    protected List<T> mValues = new ArrayList<>();
     protected LayoutInflater mInflater;
 
     public BaseListAdapter(Context context, List<T> values) {
         mContext = context;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mValues = values;
-    }
-
-    public void notify(List<T> values) {
-        mValues = values;
-        notifyDataSetInvalidated();
-        notifyDataSetChanged();
     }
 
     public Context getContext() {

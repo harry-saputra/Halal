@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import butterknife.ButterKnife;
 
 import com.rick.android.halalfood.HalalFoodApp;
 import com.umeng.analytics.MobclickAgent;
@@ -35,7 +34,6 @@ public abstract class BaseListFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View rootView = inflater.inflate(getLayoutId(), container, false);
-        ButterKnife.inject(this, rootView);
         return rootView;
     }
 
@@ -54,7 +52,6 @@ public abstract class BaseListFragment extends ListFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
     }
 
     protected void showAppToast(String toastMsg) {

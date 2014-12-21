@@ -141,16 +141,16 @@ public class MainActivity extends BaseActicity implements OnClickListener {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new HomeFragment();
+                fragment = HomeFragment.getInstance();
                 break;
             case 1:
-                fragment = new YouhuiFragment();
+                fragment = YouhuiFragment.getInstance();
                 break;
             case 2:
-                fragment = new TuangouFragment();
+                fragment = TuangouFragment.getInstance();
                 break;
             case 3:
-                fragment = new YudingFragment();
+                fragment = YudingFragment.getInstance();
                 break;
             default:
                 break;

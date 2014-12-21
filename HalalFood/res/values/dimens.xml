@@ -4,5 +4,6 @@
     <dimen name="statusMargin">0dp</dimen>
     <dimen name="userSpace">164dp</dimen>
     <dimen name="photoMarginTop">16dp</dimen>
+    <dimen name="divider">0.4dp</dimen>
 
 </resources>

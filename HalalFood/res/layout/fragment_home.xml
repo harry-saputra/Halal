@@ -1,35 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/halal_light_gray" >
-    
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="首页"
-        android:textSize="40sp" />
+        android:orientation="horizontal"
+        android:weightSum="2" >
+
+        <RelativeLayout
+            android:id="@+id/rl_meishi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/selector_bg_item"
+            android:gravity="center"
+            android:padding="15dp" >
+
+            <ImageView
+                android:id="@+id/iv_meishi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_icon_grey" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_meishi"
+                android:paddingLeft="15dp"
+                android:text="美食" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="@dimen/divider"
+            android:layout_height="match_parent"
+            android:background="@color/halal_line" />
+
+        <RelativeLayout
+            android:id="@+id/rl_tuangou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/selector_bg_item"
+            android:gravity="center"
+            android:padding="15dp" >
+
+            <ImageView
+                android:id="@+id/iv_tuangou"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_icon_grey" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_tuangou"
+                android:paddingLeft="15dp"
+                android:text="团购" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider"
+        android:background="@color/halal_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/rl_youhui"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/selector_bg_item"
+            android:gravity="center"
+            android:padding="15dp" >
+
+            <ImageView
+                android:id="@+id/iv_youhui"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_icon_grey" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_youhui"
+                android:paddingLeft="15dp"
+                android:text="优惠" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="@dimen/divider"
+            android:layout_height="match_parent"
+            android:background="@color/halal_line" />
+
+        <RelativeLayout
+            android:id="@+id/rl_yuding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/selector_bg_item"
+            android:gravity="center"
+            android:padding="15dp" >
+
+            <ImageView
+                android:id="@+id/iv_yuding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_icon_grey" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_yuding"
+                android:paddingLeft="15dp"
+                android:text="预定" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider"
+        android:background="@color/halal_line" />
 
     <TextView
-        android:id="@+id/tv_ceshi"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_title"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:text="测试Http"
-        android:textSize="40sp" />
-    
-    <Button
-        android:id="@+id/btn_ceshi"
-        android:layout_below="@+id/tv_ceshi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:text="测试Btn"
-        android:textSize="40sp" />
+        android:background="@color/halal_high_gray"
+        android:padding="10dp"
+        android:text="附近的清真美食" />
 
-</RelativeLayout>
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@android:color/transparent"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:fadingEdge="none"
+        android:listSelector="@android:color/transparent" />
+
+</LinearLayout>

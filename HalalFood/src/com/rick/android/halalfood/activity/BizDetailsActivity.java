@@ -92,6 +92,7 @@ public class BizDetailsActivity extends BaseActicity implements OnScrollChangedC
         updateParallaxEffect(scrollPosition);
     }
 
+    @SuppressWarnings("deprecation")
     private void updateActionBarTransparency(float scrollRatio) {
         int newAlpha = (int) (scrollRatio * 255);
         mActionBarBackgroundDrawable.setAlpha(newAlpha);

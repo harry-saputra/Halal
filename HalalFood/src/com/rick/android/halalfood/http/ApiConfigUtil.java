@@ -12,6 +12,7 @@ public class ApiConfigUtil {
         apiConfig.setHost(ApiConstants.apiHost);
         apiConfig.setVersion(ApiConstants.apiVersion);
         apiConfig.setOverTime(ApiConstants.overTime);
+        apiConfig.setShowLog(true);
         return apiConfig;
     }
 

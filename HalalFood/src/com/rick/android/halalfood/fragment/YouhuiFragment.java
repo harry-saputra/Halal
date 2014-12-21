@@ -1,72 +1,101 @@
 package com.rick.android.halalfood.fragment;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import butterknife.InjectView;
-import butterknife.OnClick;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.rick.android.halalfood.R;
 import com.rick.android.halalfood.activity.BizDetailsActivity;
+import com.rick.android.halalfood.adapter.CateAdapter;
 import com.rick.android.halalfood.fragment.base.BaseFragment;
 import com.rick.android.halalfood.http.BusinessApi;
 import com.rick.android.halalfood.http.response.FindBusinessResponse;
+import com.rick.android.halalfood.model.Businesse;
 import com.rick.android.halalfood.utils.HFVolleyErrorListener;
+import com.rick.android.volley.HFVolley;
 
-public class YouhuiFragment extends BaseFragment {
+public class YouhuiFragment extends BaseFragment implements OnClickListener {
+    
+    private static YouhuiFragment instance;
 
-    Listener<FindBusinessResponse> sucessListener;
+    public static final YouhuiFragment getInstance() {
+        if (null == instance) {
+            instance = new YouhuiFragment();
+        }
+        return instance;
+    }
+
+    RelativeLayout rl_meishi, rl_tuangou, rl_youhui, rl_yuding;
+    ListView mListView;
+
+    CateAdapter mAdapter;
+    List<Businesse> mList = new ArrayList<>();
     ErrorListener errorListener;
-
-    @InjectView(R.id.tv_ceshi)
-    TextView tv_ceshi;
-    @InjectView(R.id.btn_ceshi)
-    Button btn_ceshi;
+    Listener<FindBusinessResponse> sucessListener;
+    
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        instance = this;
+    }
 
     @Override
-    public int getLayoutId() {
-        return R.layout.fragment_youhui;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        mListView = (ListView) rootView.findViewById(R.id.listview);
+        rl_meishi = (RelativeLayout) rootView.findViewById(R.id.rl_meishi);
+        rl_tuangou = (RelativeLayout) rootView.findViewById(R.id.rl_tuangou);
+        rl_youhui = (RelativeLayout) rootView.findViewById(R.id.rl_youhui);
+        rl_yuding = (RelativeLayout) rootView.findViewById(R.id.rl_yuding);
+        rl_meishi.setOnClickListener(this);
+        rl_tuangou.setOnClickListener(this);
+        rl_youhui.setOnClickListener(this);
+        rl_yuding.setOnClickListener(this);
+        return rootView;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initListener();
+        requestData();
     }
 
-    @OnClick({
-            R.id.tv_ceshi, R.id.btn_ceshi
-    })
-    void onclick(View v) {
-        switch (v.getId()) {
-            case R.id.tv_ceshi:
-                Map<String, String> paramMap = new HashMap<String, String>();
-                paramMap.put("city", "上海");
-                paramMap.put("category", "美食");
-                paramMap.put("region", "长宁区");
-                paramMap.put("limit", "20");
-                paramMap.put("has_coupon", "1");
-                paramMap.put("has_deal", "1");
-                paramMap.put("keyword", "肯德基̩");
-                paramMap.put("sort", "1");
-                paramMap.put("format", "json");
-                BusinessApi.findBussiness(paramMap, sucessListener, errorListener, TAG);
-                break;
-            case R.id.btn_ceshi:
-                Intent intent = new Intent(mContext, BizDetailsActivity.class);
-                startActivity(intent);
-                break;
-            default:
-                break;
-        }
+    private void requestData() {
+        Map<String, String> paramMap = new HashMap<String, String>();
+        paramMap.put("city", "上海");
+        paramMap.put("category", "美食");
+        paramMap.put("region", "浦东新区");
+        paramMap.put("limit", "20");
+        paramMap.put("has_coupon", "0");
+        paramMap.put("has_deal", "0");
+        paramMap.put("keyword", "清真");
+        paramMap.put("sort", "1");
+        paramMap.put("format", "json");
+        BusinessApi.findBussiness(paramMap, sucessListener, errorListener, TAG);
+    }
+
+    @Override
+    public void onStop() {
+        HFVolley.cancelPendingRequests(TAG);
+        super.onStop();
     }
 
     private void initListener() {
@@ -83,17 +112,42 @@ public class YouhuiFragment extends BaseFragment {
 
             @Override
             public void onResponse(FindBusinessResponse response) {
-                if (response == null) {
-                    showToast("出错了");
-                } else if (response.isStatusOk()) {
-                    tv_ceshi.setText("total_count:" +
-                            response.getTotal_count() + "  count:" +
-                            response.getCount());
+                if (null != response && response.isStatusOk()) {
+                    mList = response.getBusinesses();
+                    fillData();
                 } else {
-                    showToast("解析出错");
+                    showToast("数据异常");
                 }
             }
         };
+
+        mListView.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(mContext, BizDetailsActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void fillData() {
+        if (null == mAdapter) {
+            mAdapter = new CateAdapter(mContext, mList);
+            mListView.setAdapter(mAdapter);
+        } else {
+            mAdapter.refresh(mList);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.rl_meishi:
+                break;
+            default:
+                break;
+        }
     }
 
 }

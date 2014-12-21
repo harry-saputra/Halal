@@ -2,14 +2,9 @@ package com.rick.android.halalfood.fragment.base;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
-import butterknife.ButterKnife;
 
 import com.rick.android.halalfood.HalalFoodApp;
 import com.umeng.analytics.MobclickAgent;
@@ -24,19 +19,6 @@ public abstract class BaseFragment extends Fragment {
         super.onAttach(activity);
         this.mContext = activity;
         this.TAG = getClass().getSimpleName();
-    }
-
-    /**
-     * @return 当前Fragment对应的Layout id
-     */
-    public abstract int getLayoutId();
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        View rootView = inflater.inflate(getLayoutId(), container, false);
-        ButterKnife.inject(this, rootView);
-        return rootView;
     }
 
     @Override
@@ -54,7 +36,6 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
     }
 
     protected void showAppToast(String toastMsg) {
