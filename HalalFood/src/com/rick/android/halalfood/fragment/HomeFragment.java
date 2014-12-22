@@ -130,12 +130,12 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
     }
 
     private void fillData(List<Businesse> mList) {
-        if (null != mAdapter) {
-            mListView.setAdapter(mAdapter);
-            mAdapter.refresh(mList);
-        } else {
+        if (null == mAdapter) {
             mAdapter = new CateAdapter(mContext, mList);
             mListView.setAdapter(mAdapter);
+        } else {
+            mListView.setAdapter(mAdapter);
+            mAdapter.refresh(mList);
         }
     }
 

@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
@@ -31,7 +30,7 @@ import com.rick.android.halalfood.utils.HFVolleyErrorListener;
 import com.rick.android.volley.HFVolley;
 
 public class YudingFragment extends BaseFragment implements OnClickListener {
-    
+
     private static YudingFragment instance;
 
     public static final YudingFragment getInstance() {
@@ -41,14 +40,13 @@ public class YudingFragment extends BaseFragment implements OnClickListener {
         return instance;
     }
 
-    RelativeLayout rl_meishi, rl_tuangou, rl_youhui, rl_yuding;
     ListView mListView;
 
     CateAdapter mAdapter;
     List<Businesse> mList = new ArrayList<>();
     ErrorListener errorListener;
     Listener<FindBusinessResponse> sucessListener;
-    
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -58,24 +56,16 @@ public class YudingFragment extends BaseFragment implements OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        mListView = (ListView) rootView.findViewById(R.id.listview);
-        rl_meishi = (RelativeLayout) rootView.findViewById(R.id.rl_meishi);
-        rl_tuangou = (RelativeLayout) rootView.findViewById(R.id.rl_tuangou);
-        rl_youhui = (RelativeLayout) rootView.findViewById(R.id.rl_youhui);
-        rl_yuding = (RelativeLayout) rootView.findViewById(R.id.rl_yuding);
-        rl_meishi.setOnClickListener(this);
-        rl_tuangou.setOnClickListener(this);
-        rl_youhui.setOnClickListener(this);
-        rl_yuding.setOnClickListener(this);
+        View rootView = inflater.inflate(R.layout.fragment_yuding, container, false);
+        // mListView = (ListView) rootView.findViewById(R.id.listview);
         return rootView;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initListener();
-        requestData();
+        // initListener();
+        // requestData();
     }
 
     private void requestData() {
@@ -137,6 +127,7 @@ public class YudingFragment extends BaseFragment implements OnClickListener {
             mListView.setAdapter(mAdapter);
         } else {
             mAdapter.refresh(mList);
+            mListView.setAdapter(mAdapter);
         }
     }
 
