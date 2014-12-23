@@ -1,100 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/selector_bg_item" >
-
-    <ImageView
-        android:id="@+id/iv_photo"
-        android:layout_width="100dp"
-        android:layout_height="80dp"
-        android:layout_centerVertical="true"
-        android:layout_margin="10dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_icon_grey" />
+    android:background="@drawable/selector_bg_item"
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/iv_photo"
-        android:layout_toRightOf="@+id/iv_photo"
-        android:orientation="vertical" >
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/iv_photo"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:scaleType="fitXY" />
 
         <LinearLayout
+            android:id="@+id/ll_cate_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="vertical"
+            android:paddingBottom="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp" >
 
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
+            <com.rick.android.halalfood.module.widget.TuDingLayout
+                android:id="@+id/ll_tuding"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:padding="5dp"
-                android:text="和萌烧烤" />
+                android:padding="5dp" />
 
-            <TextView
-                android:id="@+id/tv_label"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:padding="5dp"
-                android:text="团"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:padding="5dp" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+                <RatingBar
+                    android:id="@+id/rb_avg_rating"
+                    style="@style/starRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:rating="4.5"
+                    android:stepSize="0.5" />
 
-            <TextView
-                android:id="@+id/tv_avg_rating"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/tv_avg_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_alignTop="@+id/rb_avg_rating"
+                    android:layout_toRightOf="@+id/rb_avg_rating"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:text="￥419/人"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:padding="5dp"
-                android:text="星级5.0" />
+                android:padding="5dp" >
 
-            <TextView
-                android:id="@+id/tv_avg_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:padding="5dp"
-                android:text="￥419/人"
-                android:textStyle="bold" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_addres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/tv_distance"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:text="世纪公园" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/tv_addres"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:padding="5dp"
-                android:text="世纪公园" />
-
-            <TextView
-                android:id="@+id/tv_distance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:padding="5dp"
-                android:text="400m"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="right"
+                    android:paddingLeft="5dp"
+                    android:text="400m"
+                    android:textStyle="bold" />
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider"
-        android:layout_below="@+id/iv_photo"
         android:background="@color/halal_line" />
 
-</RelativeLayout>
+</LinearLayout>

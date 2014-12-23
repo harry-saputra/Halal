@@ -27,6 +27,7 @@ import com.rick.android.halalfood.http.BusinessApi;
 import com.rick.android.halalfood.http.response.FindBusinessResponse;
 import com.rick.android.halalfood.model.Businesse;
 import com.rick.android.halalfood.utils.HFVolleyErrorListener;
+import com.rick.android.halalfood.utils.custom.ListViewUtil;
 import com.rick.android.volley.HFVolley;
 
 public class HomeFragment extends BaseFragment implements OnClickListener {
@@ -133,8 +134,10 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
         if (null == mAdapter) {
             mAdapter = new CateAdapter(mContext, mList);
             mListView.setAdapter(mAdapter);
+            ListViewUtil.setListViewHeightBasedOnChildren(mListView);
         } else {
             mListView.setAdapter(mAdapter);
+            ListViewUtil.setListViewHeightBasedOnChildren(mListView);
             mAdapter.refresh(mList);
         }
     }

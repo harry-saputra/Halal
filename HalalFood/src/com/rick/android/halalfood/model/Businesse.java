@@ -14,7 +14,7 @@ public class Businesse {
     private List<String> categories;
     private String latitude;
     private String longitude;
-    private String avg_rating;
+    private float avg_rating;
     private String rating_img_url;
     private String rating_s_img_url;
     private String product_grade;
@@ -29,14 +29,14 @@ public class Businesse {
     private String s_photo_url;
     private String photo_count;
     private String photo_list_url;
-    private String has_coupon;
+    private int has_coupon;
     private String coupon_id;
     private String coupon_description;
     private String coupon_url;
-    private String has_deal;
+    private int has_deal;
     private String deal_count;
     private List<String> deals;
-    private String has_online_reservation;
+    private int has_online_reservation;
     private String online_reservation_url;
 
     public String getBusiness_id() {
@@ -119,11 +119,11 @@ public class Businesse {
         this.longitude = longitude;
     }
 
-    public String getAvg_rating() {
+    public float getAvg_rating() {
         return avg_rating;
     }
 
-    public void setAvg_rating(String avg_rating) {
+    public void setAvg_rating(float avg_rating) {
         this.avg_rating = avg_rating;
     }
 
@@ -239,14 +239,6 @@ public class Businesse {
         this.photo_list_url = photo_list_url;
     }
 
-    public String getHas_coupon() {
-        return has_coupon;
-    }
-
-    public void setHas_coupon(String has_coupon) {
-        this.has_coupon = has_coupon;
-    }
-
     public String getCoupon_id() {
         return coupon_id;
     }
@@ -271,12 +263,28 @@ public class Businesse {
         this.coupon_url = coupon_url;
     }
 
-    public String getHas_deal() {
+    public int getHas_coupon() {
+        return has_coupon;
+    }
+
+    public void setHas_coupon(int has_coupon) {
+        this.has_coupon = has_coupon;
+    }
+
+    public int getHas_deal() {
         return has_deal;
     }
 
-    public void setHas_deal(String has_deal) {
+    public void setHas_deal(int has_deal) {
         this.has_deal = has_deal;
+    }
+
+    public int getHas_online_reservation() {
+        return has_online_reservation;
+    }
+
+    public void setHas_online_reservation(int has_online_reservation) {
+        this.has_online_reservation = has_online_reservation;
     }
 
     public String getDeal_count() {
@@ -293,14 +301,6 @@ public class Businesse {
 
     public void setDeals(List<String> deals) {
         this.deals = deals;
-    }
-
-    public String getHas_online_reservation() {
-        return has_online_reservation;
-    }
-
-    public void setHas_online_reservation(String has_online_reservation) {
-        this.has_online_reservation = has_online_reservation;
     }
 
     public String getOnline_reservation_url() {
